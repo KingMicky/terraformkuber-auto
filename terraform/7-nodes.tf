@@ -20,33 +20,33 @@ resource "aws_iam_role_policy_attachment" "nodes-AmazonEKSWorkerNodePolicy" {
 
 resource "aws_iam_role_policy_attachment" "nodes-AmazonEC2ContainerRegistryReadOnly" {
   role       = aws_iam_role.nodes.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly" 
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
 resource "aws_eks_node_group" "private-nodes" {
   cluster_name    = aws_eks_cluster.demo.name
   node_group_name = "private-nodes"
-  node_role_arn   = aws_iam_role.nodes.arn 
+  node_role_arn   = aws_iam_role.nodes.arn
 
-    subnet_ids = [
-        aws_subnet.private-us-east-1a.id,
-        aws_subnet.private-us-east-1b.id
-    ]
+  subnet_ids = [
+    aws_subnet.private-us-east-1a.id,
+    aws_subnet.private-us-east-1b.id
+  ]
 
-    capacity_type = "ON_DEMAND"
-    instance_types = [ "t3.small" ]
+  capacity_type  = "ON_DEMAND"
+  instance_types = ["t3.small"]
 
-    scaling_config {
-        desired_size = 1
-        max_size     = 5
-        min_size     = 0
-    }
+  scaling_config {
+    desired_size = 1
+    max_size     = 5
+    min_size     = 0
+  }
 
-    update_config {
-        max_unavailable = "1"
-    }
+  update_config {
+    max_unavailable = "1"
+  }
 
-    labels = {
-      role = "general"
-    }
+  labels = {
+    role = "general"
+  }
 }
