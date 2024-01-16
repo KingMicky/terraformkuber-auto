@@ -22,16 +22,15 @@
 ### Installation
 
 1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/your-username/terraformkuber-auto.git
-   cd terraformkuber-auto
+ ```bash
+ git clone https://github.com/your-username/terraformkuber-auto.git
+ cd terraformkuber-auto
+```
 Customize the Terraform configurations in the terraform/ directory according to your infrastructure needs.
 
 Initialize Terraform:
 
   ```bash
-Copy code
 terraform init
 
 ```
